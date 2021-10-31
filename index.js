@@ -63,6 +63,20 @@ async function run() {
             res.json(result)
         })
 
+        // update approve
+        app.put('/myOrder/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const course = {
+                $set: {
+                    status: 'Approved'
+                },
+            };
+            const result = await orderCollection.updateOne(query, course)
+            res.json(result)
+            console.log(result)
+        })
+
 
     }
     finally {
